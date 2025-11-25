@@ -1,0 +1,491 @@
+📌 SECTION 1 — GAME OVERVIEW & THEME
+
+Create a dark, cinematic, horror-themed 2D puzzle adventure game titled “The Phantom of the Powerbound Manor.”
+
+The game takes place inside a haunted Victorian mansion charged with unstable electrical energy.
+
+
+
+The world aesthetic includes:
+
+Realistic fog & smoky shadows
+
+Lightning flashes & flickering lights
+
+Blue–cyan electricity glow
+
+Red ghostly runes
+
+Metallic, Victorian UI
+
+Human-like ghosts appearing between puzzles
+
+Electrically-corrupted circuits
+
+The player selects one of two characters (male/female explorer) and progresses through 5 levels, each representing a different electrical engineering concept.
+
+At the end of each level, a ghost appears and explains the electrical formula or physics principle used in that level.
+
+📌 SECTION 2 — LEVEL-BY-LEVEL MECHANICS WITH FULL MATH RULES
+
+🟨 LEVEL 1 — ENTRY HALL
+
+Concept: Ohm’s Law (V = I × R)
+
+Puzzle Mechanics:
+
+The player sees a flickering lamp.
+
+A UI shows:
+
+A Voltage slider (0–12 V)
+
+A Resistance slider (1–20 Ω)
+
+The game must compute current using Ohm’s Law:
+
+I = V / R
+
+The lamp stabilizes when current falls within a target range:
+
+Target Current: 0.18 A to 0.22 A
+
+When the player reaches the correct current range:
+
+Lamp brightness stabilizes
+
+Sound of electrical hum becomes smooth
+
+A small spark appears in one corner (simple click repair)
+
+Ghost Explanation:
+
+“You unknowingly used Ohm’s Law — V = I × R…”
+
+🟧 LEVEL 2 — STUDY ROOM
+
+Concept: Mixed Currents (Parallel vs Series Circuits)
+
+Mechanics:
+
+Two devices:
+
+
+
+Fan (needs more current)
+
+Lamp (needs less current)
+
+Players manipulate two branch resistors.
+
+
+
+Math Rules:
+
+Parallel Current Formula:
+
+Itotal=I1+I2I_{total} = I_1 + I_2
+
+Itotal
+
+​=I1
+
+​+I2
+
+​
+
+For each branch:
+
+I=V/RI = V / R
+
+I=V/R
+
+Target Conditions:
+
+
+
+Fan current: 0.3 A ± 0.05
+
+Lamp current: 0.12 A ± 0.03
+
+When both currents fall into the required target ranges, the room stabilizes.
+
+
+
+Short Circuit Event:
+
+Random sparks appear in bookshelf wires; player must tap them.
+
+🟥 LEVEL 3 — WORKSHOP
+
+Concept: Series–Parallel Hybrid Circuit
+
+Mechanics:
+
+Three branches, each requiring balanced current.
+
+
+
+Math Rules:
+
+Series Resistance:
+
+Rseries=R1+R2R_{series} = R_1 + R_2
+
+Rseries
+
+​=R1
+
+​+R2
+
+​
+
+Parallel Equivalent Resistance:
+
+1Rparallel=1Ra+1Rb+…\frac{1}{R_{parallel}} = \frac{1}{R_a} + \frac{1}{R_b} + \dots
+
+
+
+Rparallel
+
+​
+
+1
+
+​=Ra
+
+​
+
+1
+
+​+Rb
+
+​
+
+1
+
+​+…
+
+Target Conditions:
+
+
+
+Total circuit current must be within 0.25 A ± 0.02
+
+All branches must be within 10% balance tolerance
+
+Power Mechanics:
+
+Fan motor rotates at speed proportional to power:
+
+P=V×IP = V × I
+
+P=V×I
+
+Spectral Surge:
+
+3–5 random hot nodes appear; player scans using a thermal lens UI.
+
+🟦 LEVEL 4 — GENERATOR WING
+
+Concept: High Voltage Stability & Precision Tuning
+
+Mechanics:
+
+Voltage fluctuates automatically ±30%.
+
+
+
+Player must continuously apply resistance adjustments.
+
+Math Rules:
+
+Desired Power must be 5.0 W ± 0.1 W
+
+Voltage fluctuates:
+
+V(t)=Vbase+noise(−3,+3)V(t) = V_{base} + \text{noise}(-3,+3)
+
+V(t)=Vbase
+
+​+noise(−3,+3)
+
+Your engine must recompute:
+
+I=V/RI = V / R
+
+I=V/R
+
+P=V×IP = V × I
+
+P=V×I
+
+Short Storm:
+
+Every 2 seconds, new short circuits appear randomly.
+
+🟩 LEVEL 5 — PHANTOM CORE
+
+Concept: Multi-device Power Distribution
+
+Mechanics:
+
+Three devices:
+
+
+
+Lamp → needs 1.5W ± 0.05W
+
+Motor → needs 3.0W ± 0.1W
+
+Beacon → needs 4.0W ± 0.1W
+
+Player has:
+
+
+
+3 voltage sliders
+
+3 resistor sliders
+
+Each device uses:
+
+P=V×(V/R)P = V × (V / R)
+
+P=V×(V/R)
+
+All three must be solved AT THE SAME TIME.
+
+📌 SECTION 3 — ELECTRICAL SIMULATION CORE LOGIC
+
+The AI should simulate electrical systems using these formulas:
+
+
+
+Ohm’s Law
+
+
+
+I = V / R
+
+Power Law
+
+
+
+P = V * I
+
+Series Resistance
+
+
+
+R_total = R1 + R2 + R3...
+
+Parallel Resistance
+
+
+
+1/R_total = 1/R1 + 1/R2 + 1/R3
+
+Brightness Mapping
+
+
+
+brightness = clamp(P / P_max, 0, 1)
+
+Fan Speed Mapping
+
+
+
+speed = k * I
+
+Beacon Power Mapping
+
+
+
+glow = P / targetPower
+
+The AI/game engine must recompute these values every frame.
+
+📌 SECTION 4 — TECHNICAL GAME DEVELOPMENT WORKFLOW
+
+STEP 1 — Engine Selection
+
+The AI will choose one of:
+
+
+
+GDevelop (recommended — easy, no coding)
+
+Unity (complex, full coding)
+
+Godot (scripting-heavy)
+
+STEP 2 — Scene Structure
+
+Create scenes:
+
+
+
+Main Menu
+
+CharacterSelect
+
+LevelSelect
+
+Level1
+
+Level2
+
+Level3
+
+Level4
+
+Level5
+
+GhostDialog scenes
+
+📌 SECTION 5 — ASSET CREATION SPECIFICATIONS
+
+Background Art
+
+1920×1080
+
+Realistic fog
+
+Cinematic ambience
+
+Lightning cracks
+
+UI Panels
+
+Smoky
+
+Metallic blue + red glow
+
+Ghostly etched borders
+
+Buttons
+
+Gothic style
+
+Neon red inscriptions
+
+Ghost Characters
+
+Human-like silhouettes
+
+Transparent
+
+Blue–white glow
+
+Smoke particles around edges
+
+Electric Effects
+
+Lightning arcs
+
+Sparks
+
+Flicker overlays
+
+Electrical hum animations
+
+Fog Layers
+
+3 layered PNG fog sheets
+
+Soft opacity
+
+Blend mode: Screen or Additive
+
+📌 SECTION 6 — SOUND DESIGN REQUIREMENTS
+
+✔ Electrical hum (loop)
+
+
+
+✔ Power surge crack
+
+
+
+✔ Static distortion
+
+
+
+✔ Horror ambience pad
+
+
+
+✔ Low-frequency rumble
+
+
+
+✔ Ghost whisper SFX
+
+
+
+✔ Jump scare sting
+
+
+
+✔ UI click (metallic)
+
+📌 SECTION 7 — AI CODING INSTRUCTIONS
+
+The AI should generate code/events for:
+
+
+
+Slider logic
+
+Voltage/Current computation
+
+Brightness based on power
+
+Fan animation based on current
+
+Ghost fade in/out
+
+Scene transitions
+
+Short circuit events
+
+Node repairs
+
+Heat scan behavior
+
+Multi-device power balancing
+
+📌 SECTION 8 — GHOST POP-UP SYSTEM
+
+Every level ends with:
+
+
+
+Fade to black
+
+Ghost appears (opacity 0 → 100 → 0)
+
+Ghost explains the level’s electrical principle
+
+Ghost gives next-level clue
+
+Scene transitions
+
+📌 SECTION 9 — FINAL GAME OUTCOME
+
+After Level 5:
+
+
+
+Ghost fully restores form
+
+Explains the combined concepts
+
+Player frees Elias Verdan
+
+Mansion stabilizes
+
+Lights glow bright
+
+End cinematic
